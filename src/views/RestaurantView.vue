@@ -3,9 +3,9 @@
     <my-header></my-header>
     <main class="main">
       <div class="container">
-        <promo-container></promo-container>
-        <restaurants-container></restaurants-container>
+        <my-products :restaurant="restaurant"></my-products>
       </div>
+      <!-- /.container -->
     </main>
     <my-footer></my-footer>
     <auth-popup v-if="isAuthPopupVisible"></auth-popup>
@@ -14,8 +14,7 @@
 </template>
 <script>
 import MyHeader from "@/components/MyHeader.vue";
-import PromoContainer from "@/components/promo/PromoContainer.vue";
-import RestaurantsContainer from "@/components/restaurants/RestaurantsContainer.vue";
+import MyProducts from "@/components/products/MyProducts.vue";
 import MyFooter from "@/components/MyFooter.vue";
 import AuthPopup from "@/popups/AuthPopup.vue";
 import CartPopup from "@/popups/CartPopup.vue";
@@ -23,14 +22,21 @@ import { mapGetters } from "vuex";
 export default {
   components: {
     MyHeader,
-    PromoContainer,
-    RestaurantsContainer,
+    MyProducts,
     MyFooter,
     AuthPopup,
     CartPopup,
   },
   data() {
-    return {};
+    return {
+      restaurant: null,
+    };
+  },
+  created() {
+    const restaurant = this.$store.state.data.restaurants.find(
+      (restaurant) => restaurant.products === this.$route.params.id
+    );
+    this.restaurant = restaurant;
   },
   computed: {
     ...mapGetters("popups", ["isAuthPopupVisible", "isCartPopupVisible"]),
