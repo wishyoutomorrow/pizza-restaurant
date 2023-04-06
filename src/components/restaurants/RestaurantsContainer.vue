@@ -37,6 +37,9 @@ export default {
 	},
 
 	computed: {
+		...mapGetters({
+			restaurants: "getRestaurants"
+		}),
 		...mapGetters("restaurants", {
 			searchValue: "getSearchValue",
 			sortedRestaurants: "getSortedRestaurants"
@@ -45,7 +48,7 @@ export default {
 
 	methods: {
 		sortRestaurants() {
-			this.$store.dispatch("restaurants/sortRestaurants", this.$store.state)
+			this.$store.dispatch("restaurants/sortRestaurants", restaurants)
 		},
 		clearValue() {
 			this.currentSearchValue = "";

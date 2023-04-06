@@ -18,6 +18,7 @@ export default createStore({
 	},
 
 	getters: {
+		getRestaurants: state => state.data.restaurants
 	},
 
 	mutations: {

@@ -1,6 +1,6 @@
 export default {
-	sortRestaurants({ commit }, rootState) {
-		commit("sortRestaurants", rootState);
+	sortRestaurants({ commit }, restaurants) {
+		commit("sortRestaurants", restaurants);
 	},
 
 	changeSearchValue({ commit }, value) {

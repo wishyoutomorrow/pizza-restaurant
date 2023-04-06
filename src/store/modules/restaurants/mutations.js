@@ -1,6 +1,6 @@
 export default {
-	sortRestaurants(state, rootState) {
-		state.sortedRestaurants = [...rootState.data.restaurants];
+	sortRestaurants(state, restaurants) {
+		state.sortedRestaurants = [...restaurants];
 		state.sortedRestaurants = state.sortedRestaurants.filter(item => {
 			return item.name.toLowerCase().includes(state.searchValue.toLocaleLowerCase());
 		})
