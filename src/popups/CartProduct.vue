@@ -12,20 +12,20 @@
 </template>
 <script>
 export default {
-  props: {
-    product: {
-      type: Object,
-      requried: true,
-    },
-  },
-  methods: {
-    increment(product) {
-      this.$store.commit("cart/INCREMENT_PRODUCT", product);
-    },
-    decrement(product) {
-      this.$store.commit("cart/DECREMENT_PRODUCT", product);
-    },
-  },
+	props: {
+		product: {
+			type: Object,
+			requried: true,
+		},
+	},
+	methods: {
+		increment(product) {
+			this.$store.dispatch("cart/incProduct", product);
+		},
+		decrement(product) {
+			this.$store.dispatch("cart/decProduct", product);
+		},
+	},
 };
 </script>
 <style lang=""></style>

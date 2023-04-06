@@ -9,18 +9,18 @@
 </template>
 <script>
 export default {
-  name: "AddToCartButton",
-  props: {
-    product: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    addProduct(product) {
-      this.$store.commit("cart/ADD_PRODUCT", product);
-    },
-  },
+	name: "AddToCartButton",
+	props: {
+		product: {
+			type: Object,
+			required: true,
+		},
+	},
+	methods: {
+		addProduct(product) {
+			this.$store.dispatch("cart/addProduct", product);
+		},
+	},
 };
 </script>
 <style lang=""></style>
