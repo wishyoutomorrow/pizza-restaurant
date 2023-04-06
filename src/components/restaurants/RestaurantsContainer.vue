@@ -8,7 +8,7 @@
           class="input input-search"
           placeholder="Поиск блюд и ресторанов"
 					v-model="currentSearchValue"
-					@input="sortRestaurants"
+					@blur="clearValue"
         />
       </label>
     </div>
@@ -46,12 +46,17 @@ export default {
 	methods: {
 		sortRestaurants() {
 			this.$store.dispatch("restaurants/sortRestaurants", this.$store.state)
+		},
+		clearValue() {
+			this.currentSearchValue = "";
 		}
+
 	},
 
 	watch: {
 		currentSearchValue(newValue) {
 			this.$store.dispatch('restaurants/changeSearchValue', newValue)
+			this.sortRestaurants()
 		}
 	},
 
