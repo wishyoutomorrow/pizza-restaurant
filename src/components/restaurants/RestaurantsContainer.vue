@@ -7,13 +7,16 @@
           type="text"
           class="input input-search"
           placeholder="Поиск блюд и ресторанов"
+					v-model="currentSearchValue"
+					@input="sortRestaurants"
         />
       </label>
     </div>
     <div class="cards cards-restaurants">
       <restaurant-item
-        v-for="restaurant in restaurants"
+        v-for="(restaurant, index) in sortedRestaurants"
         :restaurant="restaurant"
+				:key="index"
       ></restaurant-item>
     </div>
     <!-- /.cards -->
@@ -21,15 +24,41 @@
 </template>
 <script>
 import RestaurantItem from "./RestaurantItem";
+import { mapGetters } from "vuex";
 export default {
-  components: {
-    RestaurantItem,
-  },
-  data() {
-    return {
-      restaurants: this.$store.state.data.restaurants,
-    };
-  },
+	components: {
+		RestaurantItem,
+	},
+
+	data() {
+		return {
+			currentSearchValue: "",
+		};
+	},
+
+	computed: {
+		...mapGetters("restaurants", {
+			searchValue: "getSearchValue",
+			sortedRestaurants: "getSortedRestaurants"
+		})
+	},
+
+	methods: {
+		sortRestaurants() {
+			this.$store.dispatch("restaurants/sortRestaurants", this.$store.state)
+		}
+	},
+
+	watch: {
+		currentSearchValue(newValue) {
+			this.$store.dispatch('restaurants/changeSearchValue', newValue)
+		}
+	},
+
+	mounted() {
+		this.sortRestaurants()
+	}
+
 };
 </script>
 <style lang="scss"></style>
