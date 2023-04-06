@@ -10,7 +10,10 @@
       <!-- /.card-info -->
     </div>
     <div class="cards cards-menu">
-      <my-product v-for="product in products" :product="product"></my-product>
+      <my-product v-for="product in products" 
+			:product="product"
+			:key= "product.id"
+			></my-product>
     </div>
     <!-- /.cards -->
   </section>
@@ -18,24 +21,24 @@
 <script>
 import MyProduct from "./MyProduct.vue";
 export default {
-  components: {
-    MyProduct,
-  },
-  props: {
-    restaurant: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      products: null,
-    };
-  },
-  created() {
-    const products = this.$store.state.data[this.restaurant.products];
-    this.products = products;
-  },
+	components: {
+		MyProduct,
+	},
+	props: {
+		restaurant: {
+			type: Object,
+			required: true,
+		},
+	},
+	data() {
+		return {
+			products: null,
+		};
+	},
+	created() {
+		const products = this.$store.state.data[this.restaurant.products];
+		this.products = products;
+	},
 };
 </script>
 <style lang=""></style>

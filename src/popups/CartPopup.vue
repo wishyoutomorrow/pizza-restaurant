@@ -10,6 +10,7 @@
         <cart-product
           v-for="product in products"
           :product="product"
+					:key="product.id"
         ></cart-product>
       </div>
       <!-- /.modal-body -->
@@ -29,20 +30,20 @@
 import CartProduct from "./CartProduct.vue";
 import { mapGetters } from "vuex";
 export default {
-  components: {
-    CartProduct,
-  },
-  methods: {
-    closePopup() {
-      this.$store.dispatch("popups/toggleCartPopup", false);
-    },
-  },
-  computed: {
-    ...mapGetters("cart", {
-      products: "getProducts",
-      checkSum: "getCheckSum",
-    }),
-  },
+	components: {
+		CartProduct,
+	},
+	methods: {
+		closePopup() {
+			this.$store.dispatch("popups/toggleCartPopup", false);
+		},
+	},
+	computed: {
+		...mapGetters("cart", {
+			products: "getProducts",
+			checkSum: "getCheckSum",
+		}),
+	},
 };
 </script>
 <style lang="scss"></style>
